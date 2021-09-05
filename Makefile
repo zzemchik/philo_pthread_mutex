@@ -2,7 +2,7 @@ NAME = philosophers
 LIBSDIR = .
 
 
-SOURCES = cheak_death.c eat_philo.c exit.c init_philo.c look_for_eat.c \
+SOURCES = chek_death.c eat_philo.c exit.c init_philo.c look_for_eat.c \
 main.c pars_param.c som_functions.c 
 
 OSOURCE= $(SOURCES:.c=.o)
