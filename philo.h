@@ -6,7 +6,7 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
-
+# include <string.h>
 typedef struct s_some_param
 {
 	long long			time_to_died;

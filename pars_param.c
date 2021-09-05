@@ -22,7 +22,7 @@ int	time_to_pars(int argv, char **argc, t_some_param *pilo)
 		return (-1);
 	if (pilo->time_to_sleep < 0)
 		return (-1);
-	if (pilo->sum_philo < 0)
+	if (pilo->sum_philo <= 0)
 		return (-1);
 	if (pilo->philo_eat < 0)
 		return (-1);

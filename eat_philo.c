@@ -71,12 +71,11 @@ void	help_eat2(t_philo *philo, long int time_start)
 {
 	if (philo->l_fork % 2 == 0)
 	{
-		if (philo->sum_eat == 0)
-			usleep(100);
-		eat_queue(philo, time_start, philo->l_fork, philo->r_fork);
+		usleep(100);
+		eat_queue(philo, time_start, philo->r_fork, philo->l_fork);
 	}
 	else
-		eat_queue(philo, time_start, philo->r_fork, philo->l_fork);
+		eat_queue(philo, time_start, philo->l_fork, philo->r_fork);
 }
 
 void	*eat(void *args)

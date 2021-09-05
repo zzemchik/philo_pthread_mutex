@@ -4,7 +4,7 @@ void	init_mutex(pthread_mutex_t *mutex, t_some_param *some_param)
 {
 	int	j;
 
-	j = 0;
+	j = -1;
 	while (++j < some_param->sum_philo)
 		pthread_mutex_init(&(mutex[j]), NULL);
 	pthread_mutex_init(&(some_param->death_mutex), NULL);
