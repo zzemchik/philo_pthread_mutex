@@ -26,14 +26,34 @@ void	*death(void *args)
 	return (0);
 }
 
+void	help_main(t_some_param	some_param, t_philo *philo, \
+pthread_mutex_t	*mutex, pthread_t *philo_pthr)
+{
+	pthread_t	pthread_death;
+	int			argv;
+
+	argv = -1;
+	while (++argv < some_param.sum_philo)
+		philo = init_philo(philo, argv, &some_param, mutex);
+	if (some_param.philo_eat != 0)
+		look_for_philo(philo);
+	pthread_mutex_lock(&(philo->some_param->death_mutex));
+	pthread_create(&(pthread_death), NULL, death, (void *)(philo));
+	argv = -1;
+	while (++argv < some_param.sum_philo)
+		pthread_create(&(philo_pthr[argv]), NULL, eat, (void *)(&philo[argv]));
+	argv = -1;
+	while (++argv < some_param.sum_philo)
+		pthread_join((philo_pthr[argv]), NULL);
+	pthread_join(pthread_death, NULL);
+}
+
 int	main(int argv, char **argc)
 {
 	t_philo			*philo;
 	t_some_param	some_param;
 	pthread_t		*philo_pthr;
 	pthread_mutex_t	*mutex;
-	int				i;
-	pthread_t		pthread_death;
 
 	if (time_to_pars(argv, argc, &some_param) == -1)
 	{
@@ -45,21 +65,7 @@ int	main(int argv, char **argc)
 	mutex = malloc(sizeof(pthread_mutex_t) * some_param.sum_philo);
 	if (!philo || !philo_pthr || !mutex)
 		all_free(philo, philo_pthr, mutex);
-
 	init_mutex(mutex, &some_param);
-	i = -1;
-	while (++i < some_param.sum_philo)
-		philo = init_phil(philo, i, &some_param, mutex);
-	if (some_param.philo_eat != 0)
-		look_for_philo(philo);
-	pthread_mutex_lock(&(philo->some_param->death_mutex));
-	pthread_create(&(pthread_death), NULL, death, (void *)(philo));
-	i = -1;
-	while (++i < some_param.sum_philo)
-		pthread_create(&(philo_pthr[i]), NULL, eat, (void *)(&philo[i]));
-	i = -1;
-	while (++i < some_param.sum_philo)
-		pthread_join((philo_pthr[i]), NULL);
-	pthread_join(pthread_death, NULL);
+	help_main(some_param, philo, mutex, philo_pthr);
 	all_free(philo, philo_pthr, mutex);
 }
