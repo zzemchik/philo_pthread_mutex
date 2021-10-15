@@ -1,5 +1,5 @@
-# Philosofers
-This project solves the problem philosofers and do some more. In program i use thread.
+# Philosophers
+This project solves the problem philosophers and do some more. In program i use thread.
 ## How to work
 Do make and start program whith 3 or 4 argument:
 1. Number philo.
